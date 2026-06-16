@@ -43,7 +43,7 @@ through `libwebp-sys` with a fast encoder configuration:
 
 ```toml
 [dependencies]
-fast-webp = "0.1"
+fast-webp = "0.1.1"
 ```
 
 Runtime dependencies are deliberately close to `webp`:
@@ -58,21 +58,21 @@ Minimal encoder-only build:
 
 ```toml
 [dependencies]
-fast-webp = { version = "0.1", default-features = false }
+fast-webp = { version = "0.1.1", default-features = false }
 ```
 
 Only `image` buffer integration:
 
 ```toml
 [dependencies]
-fast-webp = { version = "0.1", default-features = false, features = ["image"] }
+fast-webp = { version = "0.1.1", default-features = false, features = ["image"] }
 ```
 
 JPEG/PNG byte conversion through `image` codecs:
 
 ```toml
 [dependencies]
-fast-webp = { version = "0.1", features = ["image-codecs"] }
+fast-webp = { version = "0.1.1", features = ["image-codecs"] }
 ```
 
 If your proxy already decodes PNG/JPEG with another fast decoder, prefer feeding
@@ -244,26 +244,3 @@ Current benchmark groups:
 The benchmark generates images in memory so it is reproducible in CI. For proxy
 tuning, add your production JPEG/PNG corpus and run the same groups against those
 files.
-
-## Release
-
-```sh
-cargo fmt --all
-cargo clippy --all-targets --all-features -- -D warnings
-cargo test --all-features
-cargo package --allow-dirty
-cargo publish --dry-run
-```
-
-Tag the release from the clean commit:
-
-```sh
-git tag -a v0.1.0 -m "fast-webp 0.1.0"
-git push origin main --tags
-```
-
-After crates.io accepts the package:
-
-```sh
-cargo publish
-```
